@@ -1,11 +1,13 @@
 ﻿{ 
     function GraphDots(thisObj){
         alert("starting");
-        var DotComp = findComp("Dot",app.project);
-        if(DotComp == null) {return;}
-        var LineTestComp = findComp("Line Test",app.project);
-        if(LineTestComp == null) {return;}
-        var copyComp = DotComp.duplicate();
+        var CompositionToSearch = findComp(prompt("Please enter the Composition that contains \n the layer to duplicate. This project uses \"Line Test.\""),app.project);
+        var layerToCopy = findLayer(prompt("Please enter the Layer to duplicate. \"This project uses Dot.\""),CompositionToSearch);
+//~         var SearchComp = findComp(CompositionToSearch,app.project);
+//~         if(SearchComp == null) {return;}
+//~         var LineTestComp = findComp("Line Test",app.project);
+//~         if(LineTestComp == null) {return;}
+        var copiedLayer = app.project.
         LineTestComp.layers.add(changePositionOfLayer(1060,520,0,copyComp));
         var dotPositionArray = createArray(1000,1000);
         return;
@@ -33,11 +35,11 @@
         return array;
     }
 
-    function findLayerIndex(name,currentComp){
+    function findLayer(name,currentComp){
         for(var index = 1; currentComp.layers.length >= index; index++){
                 if( currentComp.layers[index].name.localeCompare(name) == 0 ){
                          alert(name + " Layer Found.");
-                         return index;
+                         return currentComp.layers[index];
                  }
          }
         alert(name + " Layer NOT Found.");
