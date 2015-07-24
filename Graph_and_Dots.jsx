@@ -3,13 +3,10 @@
         alert("starting");
         var CompositionToSearch = findComp(prompt("Please enter the Composition that contains \n the layer to duplicate. This project uses \"Line Test.\""),app.project);
         var layerToCopy = findLayer(prompt("Please enter the Layer to duplicate. \"This project uses Dot.\""),CompositionToSearch);
-//~         var SearchComp = findComp(CompositionToSearch,app.project);
-//~         if(SearchComp == null) {return;}
-//~         var LineTestComp = findComp("Line Test",app.project);
-//~         if(LineTestComp == null) {return;}
-        var copiedLayer = app.project.
-        LineTestComp.layers.add(changePositionOfLayer(1060,520,0,copyComp));
-        var dotPositionArray = createArray(1000,1000);
+        var duplicatedLayer = layerToCopy.duplicate();
+        duplicatedLayer.transform.position[0] = layerToCopy.transform.position[0] + 500;
+//~         LineTestComp.layers.add(changePositionOfLayer(1060,520,0,copyComp));
+//~         var dotPositionArray = createArray(1000,1000);
         return;
         
         function changePositionOfLayer(xPosition,YPosition,ZPosition,Copiedcomp){
@@ -46,11 +43,11 @@
         return null;
         }
 
-    function findComp(name,currentProject){
-        for(var index = 1; currentProject.items.length >= index; index++){
-                if( currentProject.items[index].name.localeCompare(name) == 0 ){
+    function findComp(name,project){
+        for(var index = 1; project.items.length >= index; index++){
+                if( project.items[index].name.localeCompare(name) == 0 ){
                          alert(name + " Comp Found.");
-                         return currentProject.items[index];
+                         return project.items[index];
                  }
          }
         alert(name + " Comp NOT Found.");
