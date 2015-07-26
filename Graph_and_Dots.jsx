@@ -4,8 +4,7 @@
         var CompositionToSearch = findComp(prompt("Please enter the Composition that contains \n the layer to duplicate. This project uses \"Line Test.\""),app.project);
         var layerToCopy = findLayer(prompt("Please enter the Layer to duplicate. \"This project uses Dot.\""),CompositionToSearch);
         var duplicatedLayer = layerToCopy.duplicate();
-        duplicatedLayer.transform.position[0] = layerToCopy.transform.position[0] + 500;
-//~         LineTestComp.layers.add(changePositionOfLayer(1060,520,0,copyComp));
+        duplicatedLayer.property("position").setValue([3000,1080,0]);
 //~         var dotPositionArray = createArray(1000,1000);
         return;
         
