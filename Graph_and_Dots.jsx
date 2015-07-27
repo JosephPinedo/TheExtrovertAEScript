@@ -1,34 +1,25 @@
 ﻿{ 
     function GraphDots(thisObj){
         alert("starting");
-        var CompositionToSearch = findComp(prompt("Please enter the Composition that contains \n the layer to duplicate. This project uses \"Line Test.\""),app.project);
-        var layerToCopy = findLayer(prompt("Please enter the Layer to duplicate. \"This project uses Dot.\""),CompositionToSearch);
-        var duplicatedLayer = layerToCopy.duplicate();
-        duplicatedLayer.property("position").setValue([3000,1080,0]);
-//~         var dotPositionArray = createArray(1000,1000);
+//~         var CompositionToSearch = findComp(prompt("Please enter the Composition that contains \n the layer to duplicate. This project uses \"Line Test.\""),app.project);
+//~         var layerToCopy = findLayer(prompt("Please enter the Layer to duplicate. \"This project uses Dot.\""),CompositionToSearch);
+//~         var duplicatedLayer = layerToCopy.duplicate();
+//~         duplicatedLayer.property("position").setValue([3000,1080,0]);
+        var dotPositionArray = new Array(1000);
+        var num = Math.floor((Math.random() * 1000) + 1);
+        var n = num.toString();
         return;
-        
-        function changePositionOfLayer(xPosition,YPosition,ZPosition,Copiedcomp){
-            var leftCompIndex = findLayerIndex("Left_Side_OfDot",Copiedcomp);
-            var rightCompIndex = findLayerIndex("Right_Side_OfDot",Copiedcomp);
-            Copiedcomp.layers[leftCompIndex].position[0] = xPosition;
-            Copiedcomp.layers[leftCompIndex].position[1] = YPosition;
-            Copiedcomp.layers[leftCompIndex].position[2] = ZPosition;
-            Copiedcomp.layers[rightCompIndex].position[0] = xPosition;
-            Copiedcomp.layers[rightCompIndex].position[1] = YPosition;
-            Copiedcomp.layers[rightCompIndex].position[2] = ZPosition;
-            return Copiedcomp;
-            }
-        
-        
-    function createArray(xLength,yLength){
-        var array = new Array(xLength);
-        
-        for(var index = 0; index < array.Length; index++)
-        {
-            array[index] = new Array(yLength);
-        }
-        return array;
+            
+    function createArray(length){
+          var arr = new Array(length || 0),
+              i = length;
+
+          if (arguments.length > 1) 
+          {
+            var args = Array.prototype.slice.call(arguments, 1);
+            while(i--) arr[i] = createArray.apply(this, args);
+          }        
+          return arr;
     }
 
     function findLayer(name,currentComp){
