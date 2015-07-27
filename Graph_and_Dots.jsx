@@ -1,25 +1,64 @@
 ﻿{ 
+    var numberOfGraphs = 1000;
+    var maxXCoordinate = 4096;
+    var maxYCoordinate = 2160;
+    var maxZCoordinate = 1000;
+    var NegativeSwitcher = true;
+    var dotPositionArray = new Array(numberOfGraphs);
+    var dotPositionArrayIndex = 0;
+    var tempZ = 0;
+    var tempY = 0;
+    var tempX = 0;
+    
     function GraphDots(thisObj){
-        alert("starting");
-//~         var CompositionToSearch = findComp(prompt("Please enter the Composition that contains \n the layer to duplicate. This project uses \"Line Test.\""),app.project);
-//~         var layerToCopy = findLayer(prompt("Please enter the Layer to duplicate. \"This project uses Dot.\""),CompositionToSearch);
-//~         var duplicatedLayer = layerToCopy.duplicate();
-//~         duplicatedLayer.property("position").setValue([3000,1080,0]);
-        var dotPositionArray = new Array(1000);
-        var num = Math.floor((Math.random() * 1000) + 1);
-        var n = num.toString();
+        alert("Starting");
+        
+        var CompositionToSearch = findComp(prompt("Please enter the Composition that contains \n the layer to duplicate. This project uses \"Line Test.\""),app.project);
+        var layerToCopy = findLayer(prompt("Please enter the Layer to duplicate. \"This project uses Dot.\""),CompositionToSearch);
+        createAllDots(layerToCopy);
+        
+        alert("Done");
         return;
+        
+    function createAllDots(layerToCopy)
+    {
+        for( var index = 0; index < numberOfGraphs; index++)
+        {
+                var copiedLayer = layerToCopy.duplicate();
+                randomizeLayerPosition();
+                copiedLayer.property("position").setValue([tempX,tempY,tempZ]);
+        }
+    }
+        
             
-    function createArray(length){
-          var arr = new Array(length || 0),
-              i = length;
+    function randomizeLayerPosition()
+    {     
+            var done;
+            var coordinateCode;
+            do{
+                done = true;
+                createRandomPosition();
+                coordinateCode = tempX.toString() + "*" + tempY.toString() + "*" + tempZ.toString();
+                for(var index = 0; index < dotPositionArray.length ; index++)
+                {
+                        if( coordinateCode.localeCompare(dotPositionArray[index]) == 0 )
+                        {
+                            done = false;
+                            break;
+                         }
+                 }
+             }while(!done)
+         dotPositionArray[dotPositionArrayIndex] = coordinateCode;
+         dotPositionArrayIndex++;
+    }
 
-          if (arguments.length > 1) 
-          {
-            var args = Array.prototype.slice.call(arguments, 1);
-            while(i--) arr[i] = createArray.apply(this, args);
-          }        
-          return arr;
+    function createRandomPosition()
+    {
+            tempZ = Math.floor((Math.random() * maxZCoordinate) + 1);
+            if( NegativeSwitcher ) { NegativeSwticher = false; tempZ = tempZ * -1; }
+            else { NegativeSwitcher = true; }
+            tempX = Math.floor((Math.random() * maxXCoordinate) + 1);
+            tempY = Math.floor((Math.random() * maxYCoordinate) + 1);
     }
 
     function findLayer(name,currentComp){
