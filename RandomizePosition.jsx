@@ -23,8 +23,14 @@
 //~         }
             
             var numberOfPoints = 16;
+            
+//~             xArray is arranged like so: (x,y,z)
             var xArray = createArray(numberOfPoints,3);
+            
+//~             yArray is arranged like so: (z,x,y)
             var yArray = createArray(numberOfPoints,3);
+            
+//~             zArray is arranged like so: (y,z,x)
             var zArray = createArray(numberOfPoints,3);
             
             arrangeDots(xArray, yArray, xArray);
@@ -35,10 +41,10 @@
                 xCopiedLayer.property("position").setValue([xArray[index][0],[xArray[index][1],[xArray[index][2]]);
                 
                 var yCopiedLayer = layerToCopy.duplicate();
-                yCopiedLayer.property("position").setValue([yArray[index][0],[yArray[index][1],[yArray[index][2]]);
+                yCopiedLayer.property("position").setValue([yArray[index][1],[yArray[index][2],[yArray[index][0]]);
                 
                 var zCopiedLayer = layerToCopy.duplicate();
-                zCopiedLayer.property("position").setValue([zArray[index][0],[zArray[index][1],[zArray[index][2]]);
+                zCopiedLayer.property("position").setValue([zArray[index][2],[zArray[index][0],[zArray[index][1]]);
             }
     }
 
