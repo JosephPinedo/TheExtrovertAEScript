@@ -24,27 +24,27 @@
             
             var numberOfPoints = 16;
             
-//~             xArray is arranged like so: (x,y,z)
+//~             xArray is arranged like so: (y,z,x)
             var xArray = createArray(numberOfPoints,3);
             
 //~             yArray is arranged like so: (z,x,y)
             var yArray = createArray(numberOfPoints,3);
             
-//~             zArray is arranged like so: (y,z,x)
+//~             zArray is arranged like so: (x,y,z)
             var zArray = createArray(numberOfPoints,3);
             
-            arrangeDots(xArray, yArray, xArray);
+            arrangeDots(xArray, yArray, zArray);
             
-            for( var index; index < numberOfPoints; index++)
+            for( var index = 0; index < numberOfPoints; index++)
             {
                 var xCopiedLayer = layerToCopy.duplicate();
-                xCopiedLayer.property("position").setValue([xArray[index][0],[xArray[index][1],[xArray[index][2]]);
+                xCopiedLayer.property("position").setValue( [ xArray[index][2] , xArray[index][0] , xArray[index][1]] );
                 
                 var yCopiedLayer = layerToCopy.duplicate();
-                yCopiedLayer.property("position").setValue([yArray[index][1],[yArray[index][2],[yArray[index][0]]);
+                yCopiedLayer.property("position").setValue( [yArray[index][1] , yArray[index][2] , yArray[index][0]] );
                 
                 var zCopiedLayer = layerToCopy.duplicate();
-                zCopiedLayer.property("position").setValue([zArray[index][2],[zArray[index][0],[zArray[index][1]]);
+                zCopiedLayer.property("position").setValue( [zArray[index][0] , zArray[index][1] , zArray[index][2]] );
             }
     }
 
