@@ -7,13 +7,19 @@
 //~     9) tempY 10) tempX
     
 function GraphDots(thisObj){
-        alert("Starting");
-
-        var CompositionToSearch = findComp(prompt("Please enter the Composition that contains \n the layer to duplicate. This project uses \"Line Test.\""),app.project);
-        var layerToCopy = findLayer(prompt("Please enter the Layer to duplicate. \"This project uses Dot.\""),CompositionToSearch);
-        createAllDots(layerToCopy);
+        alert("Hold on! We're starting the script.");
         
-        alert("Done");
+        var project = new FileIO(app.project,
+                                               prompt("Please enter the name of the Composition that we're going to work with.\n This project uses \"Line Test.\""),
+                                               prompt("Please enter the name of the Layer we're going to duplicate.\n This project uses \"Dot\".") );
+
+        if( project.findComp() == null ){  alert("The Composition wasn't found. Going to have to stop working. Leaving the building..."); return; }
+        
+         if( project.findLayer() == null ){  alert("The Layer wasn't found. Going to have to stop working. Leaving the building..."); return; }
+        
+        createAllDots(project.layer );
+        
+        alert("All Done! Finished successfully.");
         return;
  }
 

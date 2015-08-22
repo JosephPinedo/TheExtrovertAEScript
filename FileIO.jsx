@@ -1,25 +1,30 @@
-﻿{
-     function findLayer(name,currentComp){
-        for(var index = 1; currentComp.layers.length >= index; index++){
-                if( currentComp.layers[index].name.localeCompare(name) == 0 ){
-                         alert(name + " Layer Found.");
-                         return currentComp.layers[index];
-                 }
-         }
-        alert(name + " Layer NOT Found.");
-        return null;
-        }
-
-    function findComp(name,project)
-    {
-        for(var index = 1; project.items.length >= index; index++){
-                if( project.items[index].name.localeCompare(name) == 0 ){
-                         alert(name + " Comp Found.");
-                         return project.items[index];
-                 }
-         }
-        alert(name + " Comp NOT Found.");
-        return null;
-      }
+﻿function FileIO(project,currentComp,layer) 
+ {
+        this.layer = layer;
+     
+        this.currentComp =  currentComp;
+          
+        this.project = project;
+        
+        this.findLayer = function ()
+        {
+            for(var index = 1; this.currentComp.layers.length >= index; index++){
+                    if( this.currentComp.layers[index].name.localeCompare(this.layer) == 0 ){
+                             this.layer =  this.currentComp.layers[index];
+                             return("We won!");
+                     }
+             }
+            return null;
+        },
     
-}
+        this.findComp = function ()
+        {
+            for(var index = 1; this.project.items.length >= index; index++){
+                    if( this.project.items[index].name.localeCompare(this.currentComp) == 0 ){
+                             this.currentComp =  this.project.items[index];
+                             return("We won!");
+                     }
+             }
+            return null;
+        }  
+ }
