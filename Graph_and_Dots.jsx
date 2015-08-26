@@ -17,7 +17,8 @@ function GraphDots(thisObj){
         
          if( project.findLayer() == null ){  alert("The Layer wasn't found. Going to have to stop working. Leaving the building..."); return; }
         
-        createAllDots(project.layer );
+        var dotCreator = new RandomizePosition();
+        dotCreator.createAllDots(project.layer);
         
         alert("All Done! Finished successfully.");
         return;

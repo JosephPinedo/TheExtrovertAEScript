@@ -1,19 +1,21 @@
-﻿{   
-    #include ArrayCreator.jsx
+﻿    #include ArrayCreator.jsx
     #include ArrangeDots.jsx
-    
-    var numberOfGraphs = 1000;
-    var maxXCoordinate = 4096;
-    var maxYCoordinate = 2160;
-    var maxZCoordinate = 1000;
-    var NegativeSwitcher = true;
-    var dotPositionArray = new Array(numberOfGraphs);
-    var dotPositionArrayIndex = 0;
-    var tempZ = 0;
-    var tempY = 0;
-    var tempX = 0;
+
+function RandomizePosition()
+{   
    
-     function createAllDots(layerToCopy)
+    this.numberOfGraphs = 1000;
+    this.maxXCoordinate = 4096;
+    this.maxYCoordinate = 2160;
+    this.maxZCoordinate = 1000;
+    this.NegativeSwitcher = true;
+    this.dotPositionArray = new Array(this.numberOfGraphs);
+    this.dotPositionArrayIndex = 0;
+    this.tempZ = 0;
+    this.tempY = 0;
+    this.tempX = 0;
+   
+     this.createAllDots = function(layerToCopy)
     {
 //~         for( var index = 0; index < numberOfGraphs; index++)
 //~         {
@@ -24,14 +26,15 @@
             
             var numberOfPoints = 16;
             
+            var arrayGenerator = new ArrayCreator();
 //~             xArray is arranged like so: (y,z,x)
-            var xArray = createArray(numberOfPoints,3);
+            var xArray = arrayGenerator.createArray(numberOfPoints,3);
             
 //~             yArray is arranged like so: (z,x,y)
-            var yArray = createArray(numberOfPoints,3);
+            var yArray = arrayGenerator.createArray(numberOfPoints,3);
             
 //~             zArray is arranged like so: (x,y,z)
-            var zArray = createArray(numberOfPoints,3);
+            var zArray = arrayGenerator.createArray(numberOfPoints,3);
             
             arrangeDots(xArray, yArray, zArray);
             
@@ -48,7 +51,7 @@
             }
     }
 
-    function RandomizeLayerPosition()
+    this.RandomizeLayerPosition = function()
     {
          var done;
             var coordinateCode;
@@ -70,7 +73,7 @@
          return;
     }
 
-    function createRandomPosition()
+    this.createRandomPosition = function()
     {
             tempZ = Math.floor((Math.random() * maxZCoordinate) + 1);
             if( NegativeSwitcher ) { NegativeSwticher = false; tempZ = tempZ * -1; }

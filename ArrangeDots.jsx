@@ -1,21 +1,22 @@
-﻿{
-     var radius = 200;
-     var origin = 
+﻿function ArrangeDots()
+{
+     this.radius = 200;
+     this.origin = 
      { 
         x: 2413,
         y: 1080,
         z: 0
      };
     
-    function arrangeDots(xArray, yArray, zArray)
+    this.arrangeDots = function(xArray, yArray, zArray)
     {
-        UnitCircle(xArray, origin.y, origin.z, origin.x);
-        UnitCircle(yArray, origin.z, origin.x, origin.y);
-        UnitCircle(zArray, origin.x, origin.y, origin.z);
+        this.UnitCircle(xArray, origin.y, origin.z, origin.x);
+        this.UnitCircle(yArray, origin.z, origin.x, origin.y);
+        this.UnitCircle(zArray, origin.x, origin.y, origin.z);
     }
 
 //~      Have to add the origin to the first and second coordinate
-    function UnitCircle(array, firstCoordinateStartingPoint, secondCoordinateStartingPoint, plane)
+    this.UnitCircle = function(array, firstCoordinateStartingPoint, secondCoordinateStartingPoint, plane)
     {
         var SQRTthreeByHalf = (radius * Math.sqrt(3) * 0.5);
         var SQRTtwoByHalf = (radius * Math.sqrt(2) * 0.5);
