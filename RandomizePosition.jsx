@@ -1,5 +1,5 @@
 ﻿    #include ArrayCreator.jsx
-    #include ArrangeDots.jsx
+    #include SphereCreator.jsx
 
 function RandomizePosition()
 {   
@@ -14,19 +14,18 @@ function RandomizePosition()
     this.tempZ = 0;
     this.tempY = 0;
     this.tempX = 0;
+    this.radius = 200;
+    this.xOrigin = 2413;
+    this.yOrigin = 1080;
+    this.zOrigin = 0;
+    this.numberOfDotsNeeded = 1000;
    
      this.createAllDots = function(layerToCopy)
-    {
-//~         for( var index = 0; index < numberOfGraphs; index++)
-//~         {
-//~                 var copiedLayer = layerToCopy.duplicate();
-//~                 RandomizeLayerPosition();
-//~                 copiedLayer.property("position").setValue([tempX,tempY,tempZ]);
-//~         }
-            
-            var numberOfPoints = 16;
+    {           
+            var unitCircleBorderPoints = 16;
             
             var arrayGenerator = new ArrayCreator();
+            
 //~             xArray is arranged like so: (y,z,x)
             var xArray = arrayGenerator.createArray(numberOfPoints,3);
             
@@ -36,50 +35,31 @@ function RandomizePosition()
 //~             zArray is arranged like so: (x,y,z)
             var zArray = arrayGenerator.createArray(numberOfPoints,3);
             
-            arrangeDots(xArray, yArray, zArray);
+            var sphere = new SphereCreator(this.radius ,this.xOrigin,this.yOrigin,this.zOrigin);
             
-            for( var index = 0; index < numberOfPoints; index++)
+            sphere.createSphere(xArray, yArray, zArray);
+            
+            for( var index = 0; index < unitCircleBorderPoints; index++)
             {
-                var xCopiedLayer = layerToCopy.duplicate();
-                xCopiedLayer.property("position").setValue( [ xArray[index][2] , xArray[index][0] , xArray[index][1]] );
+                this.duplicateLayer( layerToCopy, xArray[index][2] , xArray[index][0] , xArray[index][1] );
                 
-                var yCopiedLayer = layerToCopy.duplicate();
-                yCopiedLayer.property("position").setValue( [yArray[index][1] , yArray[index][2] , yArray[index][0]] );
+                this.duplicateLayer( layerToCopy, yArray[index][1] , yArray[index][2] , yArray[index][0] );
                 
-                var zCopiedLayer = layerToCopy.duplicate();
-                zCopiedLayer.property("position").setValue( [zArray[index][0] , zArray[index][1] , zArray[index][2]] );
+                this.duplicateLayer( layerToCopy, zArray[index][0] , zArray[index][1] , zArray[index][2] );
+            }
+        
+            var arrayOfInteriorSpherePoints = sphere.fillSphere(  arrayGenerator.createArray(this.numberOfDotsNeeded,3) )
+            
+            for( var index = 0; index < this.numberOfDotsNeeded ; index++)
+            {
+                
             }
     }
 
-    this.RandomizeLayerPosition = function()
+    this.duplicateLayer = function(layerToDuplicate, xPosition, yPosition, zPosition)
     {
-         var done;
-            var coordinateCode;
-            do{
-                done = true;
-                createRandomPosition();
-                coordinateCode = tempX.toString() + "*" + tempY.toString() + "*" + tempZ.toString();
-                for(var index = 0; index < dotPositionArray.length ; index++)
-                {
-                        if( coordinateCode.localeCompare(dotPositionArray[index]) == 0 )
-                        {
-                            done = false;
-                            break;
-                         }
-                 }
-             }while(!done)
-         dotPositionArray[dotPositionArrayIndex] = coordinateCode;
-         dotPositionArrayIndex++;
-         return;
-    }
-
-    this.createRandomPosition = function()
-    {
-            tempZ = Math.floor((Math.random() * maxZCoordinate) + 1);
-            if( NegativeSwitcher ) { NegativeSwticher = false; tempZ = tempZ * -1; }
-            else { NegativeSwitcher = true; }
-            tempX = Math.floor((Math.random() * maxXCoordinate) + 1);
-            tempY = Math.floor((Math.random() * maxYCoordinate) + 1);
+            var duplicatedLayer = layerToDuplicate.duplicate();
+            duplicatedLayer.property("position").setValue( [xPosition , yPosition , zPosition] );
     }
 
 }
