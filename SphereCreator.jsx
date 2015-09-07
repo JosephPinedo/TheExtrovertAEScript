@@ -10,7 +10,15 @@ function SphereCreator(radius, x, y, z)
           y: y,
           z: z
      };
-      this.oppositeQuadrantIndicator = true;
+      this.oppositeOctantIndicator = 0;
+      this.FirstOctant = 0;
+      this.SecondOctant = 1;
+      this.ThirdOctant = 2;
+      this.FourthOctant = 3;
+      this.FifthOctant = 4;
+      this.SixthOctant = 5;
+      this.SeventhOctant = 6;
+      this.EigthOctant = 7;
     
     this.createSphere = function(xArray, yArray, zArray)
     {
@@ -136,11 +144,64 @@ function SphereCreator(radius, x, y, z)
 
     this.createRandomPosition = function(coordinates)
     {
-             var oppositeQuadrantFactor = -1;
-             if( this.oppositeQuadrantIndicator ) { this.oppositeQuadrantIndicator = false; }
-             else { this.oppositeQuadrantIndicator = true; oppositeQuadrantFactor = 1;}
-            coordinates.z = Math.round( (Math.random() * (this.origin.z + (oppositeQuadrantFactor * this.radius * 0.5) ) )  );
-            coordinates.x = Math.round( (Math.random() * (this.origin.x + (oppositeQuadrantFactor * this.radius * 0.5) ) )  );
-            coordinates.y = Math.round( (Math.random() * (this.origin.y + (oppositeQuadrantFactor * this.radius * 0.5) ) )  );
+             var oppositeXOctantFactor = 1;
+             var oppositeYOctantFactor = 1;
+             var oppositeZOctantFactor = 1;
+             var randomX = Math.random();
+             var randomY = Math.random();
+             var randomZ = Math.random();
+             switch (this.oppositeOctantIndicator % 8 )
+             {
+                 // +++
+                 case(this.FirstOctant):
+                    break;
+                 // -++
+                 case(this.SecondOctant):
+                    oppositeXOctantFactor = -1;
+                    break;
+                 // --+
+                 case(this.ThirdOctant):
+                    oppositeXOctantFactor = -1;
+                    oppositeYOctantFactor = -1;
+                    break;
+                 // +-+
+                 case(this.FourthOctant):
+                    oppositeYOctantFactor = -1;
+                    break;
+                 // ++-
+                 case(this.FifthOctant):
+                    oppositeZOctantFactor = -1;
+                    break;
+                 // -+-
+                 case(this.SixthOctant):
+                    oppositeXOctantFactor = -1;
+                    oppositeZOctantFactor = -1;
+                    break;
+                 // ---
+                 case(this.SeventhOctant):
+                    oppositeXOctantFactor = -1;
+                    oppositeYOctantFactor = -1;
+                    oppositeZOctantFactor = -1;
+                    break;
+                 // +--
+                 case(this.EigthOctant):
+                    oppositeYOctantFactor = -1;
+                    oppositeZOctantFactor = -1;
+                    break;
+                 default: break;
+                 }
+             this.oppositeOctantIndicator++;
+             while(randomZ > 0.5 ){
+                 randomZ = Math.random();
+             }
+              while( randomX > 0.5 ){
+                 randomX = Math.random();
+             }
+              while( randomY > 0.5  ){
+                 randomY = Math.random();
+             }
+            coordinates.z = this.origin.z + (randomZ * oppositeZOctantFactor * this.radius);
+            coordinates.x = this.origin.x + (randomX * oppositeXOctantFactor * this.radius);
+            coordinates.y = this.origin.y + (randomY * oppositeYOctantFactor * this.radius);
     }
  }

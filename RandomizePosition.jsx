@@ -3,7 +3,7 @@
 
 function RandomizePosition()
 {   
-    this.radius = 200;
+    this.radius = 600;
     this.xOrigin = 2413;
     this.yOrigin = 1080;
     this.zOrigin = 0;
