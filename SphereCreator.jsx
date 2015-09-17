@@ -1,4 +1,5 @@
 ﻿    #include ArrayCreator.jsx
+    #include Time.jsx
 
 function SphereCreator(radius, x, y, z)
 {

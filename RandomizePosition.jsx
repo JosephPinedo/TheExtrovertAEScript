@@ -39,11 +39,16 @@ function RandomizePosition()
         
         var arrayofMiniSpherePositions = sphere.fillSphere(this.numberOfDotsNeeded);
         
+        var timeCalculator = new Time(100,10000,this.numberOfDotsNeeded);
+        
+        var arrayOfCompTime = timeCalculator.calculateNeededCompTimes();
+        
         for (var index = 0; index < arrayofMiniSpherePositions.length; index++ )
         {
-                this.duplicateLayer(layerToCopy, arrayofMiniSpherePositions[index][0], 
+                var duplicatedLayer = this.duplicateLayer(layerToCopy, arrayofMiniSpherePositions[index][0], 
                                                           arrayofMiniSpherePositions[index][1], 
                                                           arrayofMiniSpherePositions[index][2] );
+                this.setStartTime(duplicatedLayer,arrayOfCompTime[index]);
          }
     }
 
@@ -51,6 +56,12 @@ function RandomizePosition()
     {
             var duplicatedLayer = layerToDuplicate.duplicate();
             duplicatedLayer.property("position").setValue( [xPosition , yPosition , zPosition] );
+            return duplicatedLayer;
     }
+
+     this.setStartTime = function(duplicatedLayer,newCompStartTime)
+     {
+         duplicatedLayer.startTime.setValue(newCompStartTime);
+     }
 
 }
