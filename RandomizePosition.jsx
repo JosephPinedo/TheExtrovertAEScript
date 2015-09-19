@@ -8,8 +8,7 @@ function RandomizePosition()
     this.yOrigin = 1080;
     this.zOrigin = 0;
     this.numberOfDotsNeeded = 1000;
-    this.compStartTime = 10;
-    this.compEndTime = 1000;
+    this.totalCompTime = 10;
    
      this.createAllDots = function(layerToCopy)
     {           
@@ -41,7 +40,7 @@ function RandomizePosition()
         
         var arrayofMiniSpherePositions = sphere.fillSphere(this.numberOfDotsNeeded);
         
-        var timeCalculator = new Time(this.compStartTime,this.compEndTime,this.numberOfDotsNeeded);
+        var timeCalculator = new Time(this.totalCompTime,this.numberOfDotsNeeded);
         
         var arrayOfCompTime = timeCalculator.calculateNeededCompTimes();
         
@@ -50,7 +49,7 @@ function RandomizePosition()
                 var duplicatedLayer = this.duplicateLayer(layerToCopy, arrayofMiniSpherePositions[index][0], 
                                                           arrayofMiniSpherePositions[index][1], 
                                                           arrayofMiniSpherePositions[index][2] );
-                this.setStartTime(duplicatedLayer,arrayOfCompTime[index]);
+                this.setStartTime(duplicatedLayer,arrayOfCompTime[index][0],arrayOfCompTime[index][1]);
          }
     }
 
@@ -61,9 +60,10 @@ function RandomizePosition()
             return duplicatedLayer;
     }
 
-     this.setStartTime = function(duplicatedLayer,newCompStartTime)
+     this.setStartTime = function(duplicatedLayer,newLayerStartTime,newLayerDurationPercentage)
      {
-         duplicatedLayer.startTime.setValue(newCompStartTime);
+         duplicatedLayer.startTime = newLayerStartTime;
+         duplicatedLayer.stretch = newLayerDurationPercentage;
      }
 
 }

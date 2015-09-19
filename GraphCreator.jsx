@@ -20,9 +20,6 @@ function GraphCreator(thisObj){
         if( project.findComp() == null ){  alert("The Composition wasn't found. Going to have to stop working. Leaving the building..."); return; }
         
          if( project.findLayer() == null ){  alert("The Layer wasn't found. Going to have to stop working. Leaving the building..."); return; }
-         
-        var test = new Time(10,1000,10);
-        var tesIt = test.calculateNeededCompTimes();
         
         var dotCreator = new RandomizePosition();
         dotCreator.createAllDots(project.layer);
