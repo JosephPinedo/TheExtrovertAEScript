@@ -8,6 +8,8 @@ function RandomizePosition()
     this.yOrigin = 1080;
     this.zOrigin = 0;
     this.numberOfDotsNeeded = 1000;
+    this.compStartTime = 10;
+    this.compEndTime = 1000;
    
      this.createAllDots = function(layerToCopy)
     {           
@@ -39,7 +41,7 @@ function RandomizePosition()
         
         var arrayofMiniSpherePositions = sphere.fillSphere(this.numberOfDotsNeeded);
         
-        var timeCalculator = new Time(100,10000,this.numberOfDotsNeeded);
+        var timeCalculator = new Time(this.compStartTime,this.compEndTime,this.numberOfDotsNeeded);
         
         var arrayOfCompTime = timeCalculator.calculateNeededCompTimes();
         

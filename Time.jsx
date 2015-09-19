@@ -1,17 +1,16 @@
 ﻿    #include ArrayCreator.jsx
 
-function Time(compStartTime, compEndTime, numberOfNeededTimes)
+function Time(compStartTime, numberOfNeededTimes)
 {
     this.compStartTime = compStartTime;
-    
-    this.compTotalTime = compEndTime - compStartTime;
-    
-    this.compEndTime = compEndTime;
     
     this.numberOfNeededTimes = numberOfNeededTimes;
     
     this.calculateNeededCompTimes = function()
     {
+//~         Can manipulate these values --> startTime = the time that the comp will first be seen. stretch = the percentage duration of the compTime in which the layer will be visible
+//~               project.layer.startTime = 1;
+//~              project.layer.stretch = 90;
             if( this.compTotalTime % numberOfNeededTimes == 0 )
             {
                 var timeIncrement = this.compTotalTime / numberOfNeededTimes;
